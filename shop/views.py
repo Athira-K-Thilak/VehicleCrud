@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import View
 from shop.forms import VehicleForm
 from shop.models import Vehicle
@@ -31,6 +31,25 @@ class VehicleCreateView(View):
                 color=data.get("color"),
                 fuel_type=data.get("fuel_type")
             )
+            
+            return redirect('vehicle-list')
 
         return render(request,'vehicle_add.html',{'form':form__instance})    
 
+class VehicleListView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        qs=Vehicle.objects.all()
+
+        return render(request,'vehicle_list.html',{'data':qs})
+    
+class VehicleDetailView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        id=kwargs.get('pk')
+
+        qs=Vehicle.objects.get(id=id) 
+
+        return render(request,'vehicle_detail.html',{'data':qs})   

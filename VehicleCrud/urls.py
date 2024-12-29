@@ -21,4 +21,6 @@ from shop import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('vehicle/add/',views.VehicleCreateView.as_view(),name='vehicle-add'),
+    path('vehicle/all/',views.VehicleListView.as_view(),name='vehicle-list'),
+    path('vehicle/<int:pk>/',views.VehicleDetailView.as_view(),name='vehicle-detail'),
 ]
