@@ -1,20 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {%for v in data%}
-      <div>
-        <p>Name:{{v.name}}</p>
-        <p>Brand:{{v.brand}}</p>
-        <p>Colour:{{v.color}}</p>
-        <p>Price:{{v.price}}</p>
-        <p>Fuel Type:{{v.fuel_type}}</p>
-        <hr>
-      </div>
-    {%endfor%}
-</body>
-</html>
+{%extends 'base.html'%}
+{%block main_block%}
+<div class="container mt-5">
+  <div class="row my-3">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form action="">
+            <input type="text" name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+
+
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-8">
+       <table class="table table-striped">
+           <tr>
+               <th>Name</th>
+               <th>Brand</th>
+               <th>Color</th>
+               <th>Price</th>
+               <th>Fuel Type</th>
+               <th>Image</th>
+               <th>Action</th>
+           </tr>
+
+           {%for v in data%}
+               <tr>
+                   <td>{{v.name}}</td>
+                   <td>{{v.brand}}</td>
+                   <td>{{v.color}}</td>
+                   <td>{{v.price}}</td>
+                   <td>{{v.fuel_type}}</td>
+                   <td>
+                       {% if v.image%}
+                          <img src="{{v.image.url}}" alt="" class="25px" height="75px">
+                       {%endif%}
+                   </td>
+                   <td>
+                       <a href="{%url 'vehicle-detail' v.id%}"><i class="bi bi-eye-fill text-info"></i></a>
+                       <a href="{%url 'vehicle-delete' v.id%}"><i class="bi bi-trash3 text-danger"></i></a>
+                       <a href="{%url 'vehicle-update' v.id%}"><i class="bi bi-pencil text-warning"></i></a>
+                   </td>
+               </tr>
+           {%endfor%}
+       </table>
+    </div>
+    <div class="col-2"></div>
+
+</div>
+
+</div>
+{%endblock%}

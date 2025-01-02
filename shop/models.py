@@ -14,6 +14,9 @@ class Vehicle(models.Model):
 
     fuel_type=models.CharField(max_length=200)
 
+    image=models.ImageField(upload_to="vehicleimages",default="vehicleimages/default_car.png")
+
+
     def __str__(self):
         
         return self.name
